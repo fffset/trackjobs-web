@@ -29,7 +29,7 @@ export default function KanbanBoard() {
         <div key={column} className='bg-muted rounded-lg p-4'>
           <h2 className="font-semibold mb-4">{column}</h2>
           <div className="flex flex-col gap-2">
-            {applications?.filter((app: Application) => app.status === column).map((app: Application) => (
+            {applications?.filter((app: Application) => app.status.toLowerCase() === column.toLowerCase()).map((app: Application) => (
               <JobCard
                 key={app.id}
                 company={app.company}
