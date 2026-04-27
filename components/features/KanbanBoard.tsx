@@ -7,7 +7,7 @@ import { api } from "@/lib/api";
 const COLUMNS = ['Applied', 'Interview', 'Offer', 'Rejected'];
 
 type Application = {
-  id: number;
+  id: string;
   company: string;
   position: string;
   location: string;
@@ -24,17 +24,19 @@ export default function KanbanBoard() {
   if (isLoading) return <p className="text-muted-foreground">Loading...</p>
   if (error) return <p className="text-red-500">Something went wrong.</p>
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 gap-4 items-start">
       {COLUMNS.map((column) => (
         <div key={column} className='bg-muted rounded-lg p-4'>
           <h2 className="font-semibold mb-4">{column}</h2>
           <div className="flex flex-col gap-2">
             {applications?.filter((app: Application) => app.status.toLowerCase() === column.toLowerCase()).map((app: Application) => (
               <JobCard
+                id={app.id}
                 key={app.id}
                 company={app.company}
                 position={app.position}
                 date={new Date(app.createdAt).toLocaleDateString()}
+                status={app.status}
               />
             ))}
           </div>
