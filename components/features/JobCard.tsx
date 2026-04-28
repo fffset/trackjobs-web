@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -13,7 +13,7 @@ type JobCardProps = {
   status: string
 }
 
-const STATUSES = ["Applied", "Interview", "Offer", "Rejected"];
+const STATUSES = ["applied", "interview", "offer", "rejected"];
 
 export default function JobCard({ id, company, position, date, status }: JobCardProps) {
   const queryClient = useQueryClient();
