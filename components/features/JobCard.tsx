@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import { STATUSES } from "@/lib/constants";
 
 type JobCardProps = {
   id: string;
@@ -14,8 +15,6 @@ type JobCardProps = {
   date: string;
   status: string
 }
-
-const STATUSES = ["applied", "interview", "offer", "rejected"];
 
 export default function JobCard({ id, company, position, date, status }: JobCardProps) {
   const queryClient = useQueryClient();
