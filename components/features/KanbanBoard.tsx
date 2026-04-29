@@ -3,8 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import JobCard from "./JobCard";
 import { api } from "@/lib/api";
-
-const COLUMNS = ['applied', 'interview', 'offer', 'rejected'];
+import { COLUMNS } from "@/lib/constants";
 
 type Application = {
   id: string;
