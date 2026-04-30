@@ -17,7 +17,7 @@ export default function DashboardStats() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-5 gap-4">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">
