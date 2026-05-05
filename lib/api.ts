@@ -6,14 +6,21 @@ const authHeaders = () => ({
   "Content-Type": "application/json",
   Authorization: `Bearer ${getToken()}`,
 });
+
+const handleResponse = (res: Response) => {
+  if (res.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    return;
+  }
+  return res.json();
+};
   
 
 export const api = {
   applications: {
-    getAll: () =>
-      fetch(`${API_URL}/applications`, {
-        headers: authHeaders(),
-      }).then((r) => r.json()),
+     getAll: () =>
+      fetch(`${API_URL}/applications`, { headers: authHeaders() }).then(handleResponse),
 
     create: (data: { company: string; position: string; location?: string }) =>
       fetch(`${API_URL}/applications`, {
