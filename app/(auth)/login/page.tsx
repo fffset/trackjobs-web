@@ -35,7 +35,8 @@ export default function LoginPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
+        credentials: "include" // todo erk : cookie için zorunlu
       })
 
       if (!res.ok) {
@@ -43,8 +44,6 @@ export default function LoginPage() {
         return;
       }
 
-      const data = await res.json();
-      localStorage.setItem("token", data.access_token);
       router.push("/dashboard")
     } catch {
       setError("Something went wrong");
