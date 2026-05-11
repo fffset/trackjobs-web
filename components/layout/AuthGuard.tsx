@@ -1,19 +1,33 @@
-"use client"
+"use client";
 
-import { getToken } from "@/lib/auth";
-import { useRouter } from "next/navigation"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    if (!getToken()) {
-      router.push("/login")
-    }
-  }, [router])
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/auth/me", {
+          credentials: "include",
+        });
 
-  if (!getToken()) return null;
+        if (!res.ok) {
+          router.push("/login");
+        }
+      } catch {
+        router.push("/login");
+      } finally {
+        setIsChecking(false);
+      }
+    };
 
-  return <>{children}</>
+    checkAuth();
+  }, [router]);
+
+  if (isChecking) return null;
+
+  return <>{children}</>;
 }
