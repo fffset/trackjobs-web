@@ -17,7 +17,10 @@ type Application = {
 export default function KanbanBoard() {
   const { data: applications, isLoading, error } = useQuery({
     queryKey: ["applications"],
-    queryFn: api.applications.getAll,
+     queryFn: async () => {
+    const data = await api.applications.getAll();
+    return Array.isArray(data) ? data : [];
+  },
   })
   if (isLoading) return <p className="text-muted-foreground">Loading...</p>
   if (error) return <p className="text-red-500">Something went wrong.</p>

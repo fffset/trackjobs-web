@@ -6,10 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { STATUS_COLORS, STATUSES } from "@/lib/constants";
 
 export default function DashboardStats() {
-  const { data: applications, isLoading } = useQuery({
-    queryKey: ["applications"],
-    queryFn: api.applications.getAll,
-  });
+const { data: applications, isLoading } = useQuery({
+  queryKey: ["applications"],
+  queryFn: async () => {
+    const data = await api.applications.getAll();
+    return Array.isArray(data) ? data : [];
+  },
+});
 
   if (isLoading) return <p className="text-muted-foreground">Loading...</p>
 
