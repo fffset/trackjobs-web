@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import Link from "next/link"
+
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -67,6 +69,12 @@ export default function LoginPage() {
             <Button type="submit" disabled={isLoading} >
               {isLoading ? "Logging in..." : "Login"}
             </Button>
+             <p className="text-sm text-center text-muted-foreground">
+               Don&apos;t have an account?{" "}
+               <Link href="/register" className="text-foreground hover:underline">
+                 Register
+               </Link>
+             </p>
           </form>
         </CardContent>
       </Card>
