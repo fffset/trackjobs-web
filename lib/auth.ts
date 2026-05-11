@@ -3,7 +3,10 @@ export const getToken = () => {
   return localStorage.getItem("token")
 }
 
-export const logout = () => {
-  localStorage.removeItem("token")
-  window.location.href = "/login"
-}
+export const logout = async () => {
+  await fetch("http://localhost:8000/auth/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+  window.location.href = "/login";
+};
