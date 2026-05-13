@@ -51,6 +51,7 @@ export default function RegisterPage() {
         return;
       }
 
+      // Cookie set olduktan sonra dashboard'a git
       router.push("/dashboard");
     } catch {
       setError("Something went wrong");
