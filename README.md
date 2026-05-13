@@ -2,6 +2,12 @@
 
 A full-stack job application tracker that helps you manage and organize your job search process with a Kanban-style board.
 
+## Live Demo
+
+[https://trackjobs-web.vercel.app](https://trackjobs-web.vercel.app)
+
+> Backend spins down after inactivity on free tier. First request may take ~30 seconds.
+
 ## Tech Stack
 
 - **Framework:** Next.js 15 + TypeScript
@@ -12,7 +18,7 @@ A full-stack job application tracker that helps you manage and organize your job
 
 ## Features
 
-- Kanban board with drag-and-drop status management
+- Kanban board with status management (Applied, Interview, Offer, Rejected)
 - Add, update, and delete job applications
 - Dashboard with application statistics
 - Secure authentication (register/login/logout)
@@ -61,7 +67,3 @@ App will be available at `http://localhost:3000`
 ## Deployment
 
 Deployed on [Vercel](https://vercel.com). Backend hosted on [Render](https://render.com).
-
-## Screenshots
-
-_Coming soon_
