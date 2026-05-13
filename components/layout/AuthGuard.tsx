@@ -27,7 +27,11 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     checkAuth();
   }, [router]);
 
-  if (isChecking) return null;
+  if (isChecking) return (
+  <div className="min-h-screen flex items-center justify-center">
+    <p className="text-muted-foreground">Loading...</p>
+  </div>
+);
 
   return <>{children}</>;
 }
