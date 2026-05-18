@@ -1,12 +1,12 @@
-export const getToken = () => {
-  if (typeof window === "undefined") return null;
-  return localStorage.getItem("token")
-}
+import { useAuthStore } from './auth-store';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export const logout = async () => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+  await fetch(`${API_URL}/auth/logout`, {
     method: "POST",
     credentials: "include",
   });
+  useAuthStore.getState().setAuthenticated(false);
   window.location.href = "/login";
 };
