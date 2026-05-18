@@ -1,41 +1,61 @@
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
+const refreshToken = async (): Promise<boolean> => {
+  try {
+    const res = await fetch(`${API_URL}/auth/refresh`, {
+      method: "POST",
+      credentials: "include",
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+};
+
+const fetchWithAuth = async (url: string, options: RequestInit = {}): Promise<Response> => {
+  const res = await fetch(url, { ...options, credentials: "include" });
+
+  if (res.status === 401) {
+    const refreshed = await refreshToken();
+    if (refreshed) {
+      return fetch(url, { ...options, credentials: "include" });
+    }
+    window.location.href = "/login";
+  }
+
+  return res;
+};
+
 export const api = {
   applications: {
     getAll: () =>
-      fetch(`${API_URL}/applications`, {
-        credentials: "include",
-      }).then((r) => r.json()),
+      fetchWithAuth(`${API_URL}/applications`).then((r) => r.json()),
 
     create: (data: { company: string; position: string; location?: string }) =>
-      fetch(`${API_URL}/applications`, {
+      fetchWithAuth(`${API_URL}/applications`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(data),
       }).then((r) => r.json()),
 
     update: (id: string, data: object) =>
-      fetch(`${API_URL}/applications/${id}`, {
+      fetchWithAuth(`${API_URL}/applications/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(data),
       }).then((r) => r.json()),
 
     remove: (id: string) =>
-      fetch(`${API_URL}/applications/${id}`, {
+      fetchWithAuth(`${API_URL}/applications/${id}`, {
         method: "DELETE",
-        credentials: "include",
       }),
   },
   ai: {
     analyzeCV: (data: { cv: string; jobDescription: string }) =>
-      fetch(`${API_URL}/ai/analyze-cv`, {
+      fetchWithAuth(`${API_URL}/ai/analyze-cv`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(data),
       }).then((r) => r.json()),
 
@@ -43,10 +63,9 @@ export const api = {
       data: { cv: string; jobDescription: string },
       onChunk: (text: string) => void
     ) => {
-      const res = await fetch(`${API_URL}/ai/cover-letter`, {
+      const res = await fetchWithAuth(`${API_URL}/ai/cover-letter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(data),
       });
 
