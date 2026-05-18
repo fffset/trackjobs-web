@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { logout } from "@/lib/auth";
 
 
@@ -18,9 +17,9 @@ export default function Navbar() {
         <Link href='/applications' className="text-sm text-muted-foreground hover:text-foreground">
           Applications
         </Link>
-        <Button variant="ghost" size="sm" onClick={logout}>
+        <button className="text-sm text-muted-foreground hover:text-foreground" onClick={logout}>
           Logout
-        </Button>
+        </button>
       </div>
     </nav>
   )
