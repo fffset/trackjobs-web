@@ -22,6 +22,7 @@ const fetchWithAuth = async (url: string, options: RequestInit = {}): Promise<Re
       return fetch(url, { ...options, credentials: "include" });
     }
     window.location.href = "/login";
+    throw new Error("Unauthorized");
   }
 
   return res;
