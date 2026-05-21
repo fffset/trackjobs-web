@@ -13,21 +13,20 @@ A full-stack job application tracker that helps you manage and organize your job
 - **Framework:** Next.js 15 + TypeScript
 - **Styling:** Tailwind CSS
 - **UI Components:** Shadcn/ui
-- **State Management:** TanStack Query
-- **Auth:** JWT with httpOnly cookies
+- **State Management:** TanStack Query + Zustand
+- **Auth:** JWT with httpOnly cookies + Refresh Token
 
 ## Features
 
 - Kanban board with status management (Applied, Interview, Offer, Rejected)
 - Add, update, and delete job applications
 - Dashboard with application statistics
-- Secure authentication (register/login/logout)
-- Remember Me functionality
+- Secure authentication (register/login/logout) with Remember Me
+- **Claude AI-powered CV analysis** — paste your CV and job description, get a compatibility score, strengths, weaknesses, and recommendations
 - Responsive design
 
 ## Coming Soon
 
-- Claude AI integration for CV analysis
 - Cover letter generation
 - Job listing compatibility score
 
